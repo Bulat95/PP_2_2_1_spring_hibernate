@@ -3,19 +3,25 @@ package hiber.model;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "cars")
+@Table(name = "cars")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private long id;
 
-    @Column (name = "model")
+    @Column(name = "model")
     private String model;
 
-    @Override
-    public String toString() {
-        return model + ", series = " + series;
+    @Column(name = "series")
+    private int series;
+
+    public Car() {
+
+    }
+
+    public Car(String model, int series) {
+        this.series = series;
+        this.model = model;
     }
 
     public long getId() {
@@ -42,16 +48,28 @@ public class Car {
         this.series = series;
     }
 
-    @Column (name = "series")
-    private int series;
-
-    public Car (){
-
+    @Override
+    public String toString() {
+        return model + ", series = " + series;
     }
 
-    public Car (String model, int series){
-        this.series = series;
-        this.model = model;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Car)) return false;
+
+        Car car = (Car) o;
+
+        if (getId() != car.getId()) return false;
+        if (getSeries() != car.getSeries()) return false;
+        return getModel() != null ? getModel().equals(car.getModel()) : car.getModel() == null;
     }
 
+    @Override
+    public int hashCode() {
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
+        result = 31 * result + getSeries();
+        return result;
+    }
 }

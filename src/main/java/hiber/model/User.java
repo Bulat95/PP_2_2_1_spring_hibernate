@@ -9,12 +9,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Override
-    public String toString() {
-        return "Name = " + firstName + ", LastName = " + lastName + ", email = " + email + ", car = " + car;
-    }
-
     @Column(name = "name")
     private String firstName;
 
@@ -75,5 +69,36 @@ public class User {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    @Override
+    public String toString() {
+        return "Name = " + firstName + ", LastName = " + lastName + ", email = " + email + ", car = " + car;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
+        if (getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null)
+            return false;
+        if (getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null)
+            return false;
+        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
+        return getCar() != null ? getCar().equals(user.getCar()) : user.getCar() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
+        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getCar() != null ? getCar().hashCode() : 0);
+        return result;
     }
 }

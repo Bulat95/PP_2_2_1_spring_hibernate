@@ -8,9 +8,10 @@ import java.util.List;
 
 public interface UserService {
 
-    @Transactional
+
     void add(User user);
+
     List<User> listUsers();
 
-    User getUserOnCar(Car car);
+    User getUserWithCar(Car car);
 }
