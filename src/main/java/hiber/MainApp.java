@@ -16,28 +16,26 @@ public class MainApp {
 
         UserService userService = context.getBean(UserService.class);
 
-        User user1 = new User("User1", "Lastname1", "user1@mail.ru");
-        User user2 = new User("User2", "Lastname1", "user1@mail.ru");
-        User user3 = new User("User3", "Lastname1", "user1@mail.ru");
-        User user4 = new User("User4", "Lastname1", "user1@mail.ru");
-
         Car BMW = new Car("e34", 1);
         Car Audi = new Car("Q7", 2);
         Car Lada = new Car("2107", 7);
         Car UAZ = new Car("bobik", 777);
 
+        User user1 = new User("User1", "Lastname1", "user1@mail.ru");
+        User user2 = new User("User2", "Lastname1", "user1@mail.ru");
+        User user3 = new User("User3", "Lastname1", "user1@mail.ru");
+        User user4 = new User("User4", "Lastname1", "user1@mail.ru");
+
         user1.setCar(BMW);
         user2.setCar(Audi);
-        user3.setCar(Lada);
-        user4.setCar(UAZ);
 
-        userService.add(user1);
-        userService.add(user2);
-        userService.add(user3);
-        userService.add(user4);
+        userService.addUserInDB(user1);
+        userService.addUserInDB(user2);
+        userService.addUserInDB(user3);
+        userService.addUserInDB(user4);
 
         System.out.println(userService.getUserWithCar(BMW));
-//      List<User> users = userService.listUsers();
+      List<User> users = userService.getlistUsers();
 //      for (User user : users) {
 //         System.out.println("Id = "+user.getId());
 //         System.out.println("First Name = "+user.getFirstName());

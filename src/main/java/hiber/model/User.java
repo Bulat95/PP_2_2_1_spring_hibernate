@@ -1,5 +1,9 @@
 package hiber.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Table(name = "users")
@@ -25,10 +29,12 @@ public class User {
     public User() {
     }
 
+    @Autowired
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.car = car;
     }
 
     public Long getId() {
@@ -66,7 +72,7 @@ public class User {
     public Car getCar() {
         return car;
     }
-
+    @Autowired
     public void setCar(Car car) {
         this.car = car;
     }
@@ -83,22 +89,11 @@ public class User {
 
         User user = (User) o;
 
-        if (getId() != null ? !getId().equals(user.getId()) : user.getId() != null) return false;
-        if (getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null)
-            return false;
-        if (getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null)
-            return false;
-        if (getEmail() != null ? !getEmail().equals(user.getEmail()) : user.getEmail() != null) return false;
-        return getCar() != null ? getCar().equals(user.getCar()) : user.getCar() == null;
+        return getId() != null ? getId().equals(user.getId()) : user.getId() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
-        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
-        result = 31 * result + (getCar() != null ? getCar().hashCode() : 0);
-        return result;
+        return getId() != null ? getId().hashCode() : 0;
     }
 }

@@ -1,9 +1,13 @@
 package hiber.model;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cars")
+@Component
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,16 +64,11 @@ public class Car {
 
         Car car = (Car) o;
 
-        if (getId() != car.getId()) return false;
-        if (getSeries() != car.getSeries()) return false;
-        return getModel() != null ? getModel().equals(car.getModel()) : car.getModel() == null;
+        return getId() == car.getId();
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + (getModel() != null ? getModel().hashCode() : 0);
-        result = 31 * result + getSeries();
-        return result;
+        return (int) (getId() ^ (getId() >>> 32));
     }
 }
