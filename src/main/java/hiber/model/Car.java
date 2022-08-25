@@ -1,13 +1,9 @@
 package hiber.model;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cars")
-@Component
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,9 +57,7 @@ public class Car {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Car)) return false;
-
         Car car = (Car) o;
-
         return getId() == car.getId();
     }
 

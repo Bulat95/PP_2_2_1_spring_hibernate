@@ -1,15 +1,12 @@
 package hiber.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
 @Table(name = "users")
 @Entity
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,7 +26,6 @@ public class User {
     public User() {
     }
 
-    @Autowired
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,6 +68,7 @@ public class User {
     public Car getCar() {
         return car;
     }
+
     @Autowired
     public void setCar(Car car) {
         this.car = car;
@@ -86,9 +83,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
-
         User user = (User) o;
-
         return getId() != null ? getId().equals(user.getId()) : user.getId() == null;
     }
 
