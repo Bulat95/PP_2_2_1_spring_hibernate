@@ -69,7 +69,7 @@ public class User {
         return car;
     }
 
-    @Autowired
+
     public void setCar(Car car) {
         this.car = car;
     }

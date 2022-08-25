@@ -13,7 +13,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Controller
 public class UserDaoImp implements UserDao {
     private SessionFactory sessionFactory;
 
