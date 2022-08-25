@@ -5,6 +5,7 @@ import hiber.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
@@ -12,10 +13,15 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Controller
 public class UserDaoImp implements UserDao {
 
-    @Autowired
+
     private SessionFactory sessionFactory;
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void addUserInDB(User user) {
